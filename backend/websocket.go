@@ -9,6 +9,7 @@ import (
 )
 
 var upgrader = websocket.Upgrader{
+	///all domains and ports by default
 	CheckOrigin: func(req *http.Request) bool {
 		return true
 	},
@@ -29,7 +30,7 @@ func handleWebsocket(res http.ResponseWriter, req *http.Request) {
 	username := getSessionUser(req)
 
 	if username == "" {
-		fmt.Println("user not logged in")
+		fmt.Println("handleWebsocket() : user not logged in")
 		http.Error(res, "Unauthorized", http.StatusUnauthorized)
 		return
 	}
@@ -100,9 +101,15 @@ func writeMessages(c *Client) {
 	fmt.Println("xcccc : ", c)
 	for msg := range c.send {
 		log.Printf("✉️  Sending message to %s: %s", c.username, msg)
-		err := c.conn.WriteMessage(websocket.TextMessage, msg)
-		if err != nil {
-			log.Println("write error:", err)
+		//check if connn still active
+		if c.conn != nil && c.conn.UnderlyingConn() != nil {
+			err := c.conn.WriteMessage(websocket.TextMessage, msg)
+			if err != nil {
+				log.Println("write error:", err)
+				break
+			}	
+		}else{
+			log.Printf("⚠️ websocket for %s is closed.\n", c.username)
 			break
 		}
 	}
@@ -114,6 +121,7 @@ func init() {
 		for {
 			msg := <-broadcast
 			log.Println("📣 Broadcasting:", string(msg)) // Add this line
+			fmt.Println("------------")
 			for client := range clients {
 				select {
 				case client.send <- msg:
