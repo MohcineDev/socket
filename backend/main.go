@@ -8,8 +8,6 @@ import (
 )
 
 func main() {
-	// TODO:
-	// why this work without importing it
 	initDB()
 
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
@@ -19,6 +17,7 @@ func main() {
 	http.HandleFunc("/register", handleRegisterPage)
 
 	http.HandleFunc("/ws", handleWebsocket)
+	
 	http.HandleFunc("/login-submit", handleLogin)
 	http.HandleFunc("/register-submit", handleRegister)
 	http.HandleFunc("/logout", handleLogout)
@@ -41,7 +40,7 @@ func handleLoginPage(res http.ResponseWriter, req *http.Request) {
 func handleRegisterPage(res http.ResponseWriter, req *http.Request) {
 	http.ServeFile(res, req, filepath.Join("static", "register.html"))
 }
- 
+
 func handleLogin(res http.ResponseWriter, req *http.Request) {
 	if req.Method != http.MethodPost {
 		http.Redirect(res, req, "/login", http.StatusSeeOther)

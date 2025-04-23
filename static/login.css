@@ -1,0 +1,84 @@
+/* Apply retro background with gradient */
+
+
+/* Container for centering the form */
+.container {
+  padding: 20px;
+  border-radius: 15px;
+  /* Rounded corners */
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+  /* Thick shadow for depth */
+  text-align: center;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Retro-style heading */
+.retro-header {
+  color: #843766;
+  /* Neon pink */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  /* Add shadow for emphasis */
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* Retro form inputs */
+.retro-form {
+  width: 300px;
+
+}
+
+.retro-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #7873f5;
+  /* Bright blue borders */
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  /* Light background for input fields */
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.retro-form input:focus {
+  border-color: #843766;
+  /* Focus with neon pink border */
+  background-color: #fffbf1;
+}
+
+/* Retro-style button */
+.retro-button {
+  background-color: #843766;
+  /* Neon pink button */
+  color: white;
+  padding: 15px;
+  border: none;
+  width: 100%;
+  border-radius: 10px;
+  /* Rounded corners */
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  /* Button shadow for depth */
+  transition: all 0.3s ease;
+}
+
+.retro-button:hover {
+  background-color: #7873f5;
+  /* Change button color on hover */
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Additional styling for smaller screens */
+@media (max-width: 400px) {
+  .container {
+    width: 90%;
+  }
+}

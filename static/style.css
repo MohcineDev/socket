@@ -1,10 +1,14 @@
 body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 0;
     background: #101020;
     color: #eee;
+    font-family: 'Comic Sans MS', sans-serif; /* Classic 90s font */
+   
 }
-
+input{
+    box-sizing: border-box;
+}
 #chat-box {
     max-width: 350px;
     border: 1px solid #ccc;
@@ -12,4 +16,7 @@ body {
     overflow-y: scroll;
     margin-bottom: 10px;
     padding: 10px;
+}
+.line{
+    font-size: 13px;
 }

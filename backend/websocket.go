@@ -29,6 +29,7 @@ func handleWebsocket(res http.ResponseWriter, req *http.Request) {
 	username := getSessionUser(req)
 
 	if username == "" {
+		fmt.Println("user not logged in")
 		http.Error(res, "Unauthorized", http.StatusUnauthorized)
 		return
 	}

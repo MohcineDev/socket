@@ -6,12 +6,14 @@ window.onload = async function () {
 
     const chatBox = this.document.getElementById("chat-box")
 
-    messages.forEach(msg => {
-        const line = document.createElement("div")
-        line.textContent = `[${msg.created_at}] ${msg.username} : ${msg.message}`
-        chatBox.appendChild(line)
-    });
-7
+    messages && messages.length ?
+        messages.forEach(msg => {
+            const line = document.createElement("div")
+        line.classList.add('line')
+            line.textContent = `[${msg.created_at}] ${msg.username} : ${msg.message}`
+            chatBox.appendChild(line)
+        }) : null
+     
     ///connect to websocket
     socket = new WebSocket(`ws://${location.host}/ws`)
     socket.onopen = () => console.log("✅ WebSocket connected!");
@@ -22,7 +24,7 @@ window.onload = async function () {
         console.log("📩 Message from server:", e.data); // 👀
         const chatBox = this.document.getElementById("chat-box")
         const line = document.createElement('div')
-
+        line.classList.add('line')
         if (e.data.includes('has joined')) {
             line.textContent = e.data
             line.style.fontStyle = 'italic'
@@ -56,7 +58,7 @@ function sendMessage() {
     //     body: `message=${encodeURIComponent(msg)}`
     // })
     if (socket && socket.readyState === WebSocket.OPEN) {
-        socket.send(msg); 
+        socket.send(msg);
         input.value = "";
     } else {
         alert("WebSocket is not connected!");
